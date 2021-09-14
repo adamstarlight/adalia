@@ -1,5 +1,6 @@
 package org.adalia.path.intersections
 
+import org.adalia.math._
 import org.adalia.path._
 
 object CurveIntersection {

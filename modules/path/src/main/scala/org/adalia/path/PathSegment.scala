@@ -1,5 +1,7 @@
 package org.adalia.path
 
+import org.adalia.math._
+
 import intersections.LineIntersection
 import intersections.CurveIntersection
 
