@@ -19,7 +19,11 @@ lazy val mathModule = (project in file("modules/math"))
 
 lazy val pathModule = (project in file("modules/path"))
     .settings(commonSettings)
+    .aggregate(mathModule)
+    .dependsOn(mathModule)
 
 lazy val shapeModule = (project in file("modules/shape"))
     .settings(commonSettings)
+    .aggregate(mathModule, pathModule)
+    .dependsOn(mathModule, pathModule)
 
