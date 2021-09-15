@@ -37,7 +37,8 @@ object LineSpec extends Properties("Line") {
   }
 
   property("line intersection result is metamorphic") = forAll {
-    (l1: Line, l2: Line) => l1.intersect(l2) == l2.intersect(l1)
+    (l1: Line, l2: Line) =>
+      l1.intersect(l2).head.distance(l2.intersect(l1).head) <= tolerance.value
   }
 
   property("lines have no more that 1 point of intersection") = forAll {

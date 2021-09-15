@@ -10,7 +10,13 @@ object LineIntersection {
   import Tolerance._
 
   def intersect(l1: Line, l2: Line): Option[Point2D] = {
-    if (l1.m +- l2.m) None else Some(Point2D(0, 0))
+    if (l1.m +- l2.m) None
+    else {
+      val ox = (l2.p - l1.p) / (l1.m - l2.m)
+      val oy = l1.m * ox + l1.p
+
+      Some(Point2D(ox, oy))
+    }
   }
 
   def intersect(s1: LineSegment, s2: LineSegment): Option[Point2D] = ???
