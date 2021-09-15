@@ -6,11 +6,13 @@ import intersections.LineIntersection
 import intersections.CurveIntersection
 
 sealed trait PathSegment {
-  def intersect(other: PathSegment): List[Point]
+  def intersect(other: PathSegment): List[Point2D]
 }
 
-case class Line(a: Point, b: Point) extends LinearLine(a, b) with PathSegment {
-  def intersect(other: PathSegment): List[Point] = other match {
+case class Line(a: Point2D, b: Point2D)
+    extends LinearLine(a, b)
+    with PathSegment {
+  def intersect(other: PathSegment): List[Point2D] = other match {
     case l: Line        => LineIntersection.intersect(this, l).toList
     case l: LineSegment => LineIntersection.intersect(this, l).toList
     case c: CubicCurve  => CurveIntersection.intersect(this, c)
@@ -18,10 +20,10 @@ case class Line(a: Point, b: Point) extends LinearLine(a, b) with PathSegment {
   }
 }
 
-case class LineSegment(a: Point, b: Point)
+case class LineSegment(a: Point2D, b: Point2D)
     extends LinearLine(a, b)
     with PathSegment {
-  def intersect(other: PathSegment): List[Point] = other match {
+  def intersect(other: PathSegment): List[Point2D] = other match {
     case l: Line        => LineIntersection.intersect(l, this).toList
     case l: LineSegment => LineIntersection.intersect(this, l).toList
     case c: CubicCurve  => CurveIntersection.intersect(this, c)
@@ -29,8 +31,9 @@ case class LineSegment(a: Point, b: Point)
   }
 }
 
-case class CubicCurve(p0: Point, p1: Point, p2: Point) extends PathSegment {
-  def intersect(other: PathSegment): List[Point] = other match {
+case class CubicCurve(p0: Point2D, p1: Point2D, p2: Point2D)
+    extends PathSegment {
+  def intersect(other: PathSegment): List[Point2D] = other match {
     case l: Line        => CurveIntersection.intersect(l, this)
     case l: LineSegment => CurveIntersection.intersect(l, this)
     case c: CubicCurve  => CurveIntersection.intersect(this, c)
@@ -38,9 +41,9 @@ case class CubicCurve(p0: Point, p1: Point, p2: Point) extends PathSegment {
   }
 }
 
-case class QuadCurve(p0: Point, p1: Point, p2: Point, p3: Point)
+case class QuadCurve(p0: Point2D, p1: Point2D, p2: Point2D, p3: Point2D)
     extends PathSegment {
-  def intersect(other: PathSegment): List[Point] = other match {
+  def intersect(other: PathSegment): List[Point2D] = other match {
     case l: Line        => CurveIntersection.intersect(l, this)
     case l: LineSegment => CurveIntersection.intersect(l, this)
     case c: CubicCurve  => CurveIntersection.intersect(c, this)
