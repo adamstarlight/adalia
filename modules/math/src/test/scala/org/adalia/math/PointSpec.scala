@@ -33,7 +33,7 @@ object Point2DSpec extends Properties("Point2D") {
     } yield CircleCoord(angle, radius)
 
   def clockwisePoint2Ds: Gen[(Point2D, Point2D, Point2D)] = {
-    implicit val angleTolerance = Tolerance(0.01)
+    implicit val angleTolerance = Tolerance(0.0045)
     for {
       origin <- Arbitrary.arbitrary[Point2D]
       a0 <- Gen.choose(0.0, 2.0 * math.Pi)
