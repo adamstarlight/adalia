@@ -1,12 +1,17 @@
 package org.adalia.path
 
 import org.scalacheck._
+import org.scalacheck.Test.Parameters
+
 import org.adalia.math._
 import org.adalia.math.helper.Tolerance
 
 object LineSpec extends Properties("Line") {
   import Tolerance._
   import Prop._
+
+  override def overrideParameters(p: Parameters) =
+    p.withMinSuccessfulTests(10000)
 
   implicit lazy val arbPoint: Arbitrary[Point2D] = Arbitrary {
     for {
