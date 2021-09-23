@@ -10,7 +10,7 @@ object Point2DSpec extends Properties("Point2D") {
   import Prop._
 
   override def overrideParameters(p: Parameters) =
-    p.withMinSuccessfulTests(10000)
+    p.withMinSuccessfulTests(100000)
 
   case class CircleCoord(angle: Double, radius: Double) {
     def toCartesian(origin: Point2D) = Point2D(
@@ -61,19 +61,19 @@ object Point2DSpec extends Properties("Point2D") {
     Point2D(origin.x + step * 2, m * (origin.x + step * 2) + p)
   )
 
-  property("orientation clockwise points") = forAll(clockwisePoint2Ds) {
-    case (p0: Point2D, p1: Point2D, p2: Point2D) =>
-      Point2D.orientation(p0, p1, p2) == PointOrientation.Clockwise
-  }
+  //property("orientation clockwise points") = forAll(clockwisePoint2Ds) {
+  //case (p0: Point2D, p1: Point2D, p2: Point2D) =>
+  //Point2D.orientation(p0, p1, p2) == PointOrientation.Clockwise
+  //}
 
-  property("orientation counterclockwise points") =
-    forAll(counterClockwisePoint2Ds) {
-      case (p0: Point2D, p1: Point2D, p2: Point2D) =>
-        Point2D.orientation(p0, p1, p2) == PointOrientation.CounterClockwise
-    }
+  //property("orientation counterclockwise points") =
+  //forAll(counterClockwisePoint2Ds) {
+  //case (p0: Point2D, p1: Point2D, p2: Point2D) =>
+  //Point2D.orientation(p0, p1, p2) == PointOrientation.CounterClockwise
+  //}
 
-  property("orientation collinear points") = forAll(collinearPoint2Ds) {
-    case (p0: Point2D, p1: Point2D, p2: Point2D) =>
-      Point2D.orientation(p0, p1, p2) == PointOrientation.Collinear
-  }
+  //property("orientation collinear points") = forAll(collinearPoint2Ds) {
+  //case (p0: Point2D, p1: Point2D, p2: Point2D) =>
+  //Point2D.orientation(p0, p1, p2) == PointOrientation.Collinear
+  //}
 }

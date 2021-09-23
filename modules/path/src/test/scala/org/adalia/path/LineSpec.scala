@@ -21,9 +21,14 @@ object LineSpec extends Properties("Line") {
   }
 
   implicit lazy val arbLine: Arbitrary[Line] = Arbitrary {
+    val minPointOffset = 0.001
+
     for {
       a <- Arbitrary.arbitrary[Point2D]
-      b <- Arbitrary.arbitrary[Point2D]
+      b <- Arbitrary.arbitrary[Point2D] suchThat { p =>
+        math.abs(a.x - p.x) > minPointOffset &&
+        math.abs(a.y - p.y) > minPointOffset
+      }
     } yield Line(a, b)
   }
 

@@ -5,7 +5,7 @@ import math._
 case class Tolerance[T](value: T)
 
 object Tolerance {
-  implicit val tolerance = Tolerance(0.0000001)
+  implicit val tolerance = Tolerance(0.00000002)
 
   implicit class DoubleToleranceOp(self: Double) {
     def +-(other: Double)(implicit tolerance: Tolerance[Double]): Boolean =
