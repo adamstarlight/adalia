@@ -2,7 +2,7 @@ package org.adalia.math
 
 import math.{min, max, abs, sqrt}
 
-case class Rect(origin: Point2D, size: Point2D) {
+case class Rect(origin: Point2D, size: Point2D) extends Boundary {
   val xmin = origin.x
   val xmax = origin.x + size.x
   val ymin = origin.y
